@@ -1,0 +1,35 @@
+{
+  "_README": "FROZEN GROUND-TRUTH LABELING SPEC for the THEIA E3 evaluation. Values transcribed directly from the DARPA TA5.1 Engagement 3 Ground Truth Report (Kudu Dynamics, May-2018), THEIA sections 3.3, 3.11, 4.6, 4.8. This is the ONLY place attack-vs-benign truth enters the pipeline; the tagger/detector never sees it. Keys mirror the CADETS spec so connector_stage2_theia.py loads it unchanged.",
+
+  "timezone_note": "Report event logs are in US Eastern (UTC-4 in April 2018), same convention as the CADETS report. Windows below are converted to UTC by adding 4 hours. The THEIA target host appears on the enterprise net as 128.55.12.167; attacker infrastructure is the external 145.x/104.x/61.x/etc. addresses listed in c2_ips_corroborating.",
+
+  "attack_windows_utc": [
+    ["2018-04-10T17:30:00Z", "2018-04-10T19:10:00Z"],
+    ["2018-04-12T16:40:00Z", "2018-04-12T17:30:00Z"],
+    ["2018-04-13T17:45:00Z", "2018-04-13T18:10:00Z"]
+  ],
+
+  "_episode_provenance": {
+    "2018-04-10 (Firefox backdoor, Drakon in-memory; report 3.3)": "Firefox 54.0.1 exploited via gatech.edu ad server; in-memory drakon, then dropped/executed as /home/admin/clean and /home/admin/profile with privilege-escalated execution; wrote /var/log/xdev. Eastern event log 13:41-14:55 -> UTC 17:41-18:55; window padded. Includes the 4.6 phishing-link episode (THEIA open email 13:42 Eastern) which overlaps this afternoon and has only browser/C2 host traces.",
+    "2018-04-12 (Browser extension, Drakon dropper; report 3.11)": "Drakon written to disk from the pass-manager browser extension; acting process gtcache (Drakon APT); whoami/ps discovery; dropped xdev, wdev, /tmp/memtrace.so; micro-apt dropped as /var/log/mail with C2 to 149.52.198.23; injection into sshd failed. Eastern 12:44-13:26 -> UTC 16:44-17:26; padded.",
+    "2018-04-13 (Phishing e-mail w/ executable attachment; report 4.8)": "Malicious executable tcexec downloaded and run; FAILED on a missing QT library, so little host activity beyond the download/exec attempt. Eastern 13:50-14:04 -> UTC 17:50-18:04; padded."
+  },
+
+  "implant_process_names": ["clean", "profile", "gtcache", "mail", "tcexec"],
+
+  "implant_file_basenames": ["clean", "profile", "xdev", "wdev", "memtrace", "mail", "tcexec"],
+
+  "c2_ips_corroborating": [
+    "145.199.103.57", "61.130.69.232", "5.214.163.155", "161.116.88.72",
+    "146.153.68.151", "104.228.117.212", "141.43.176.203", "7.149.198.40",
+    "149.52.198.23", "208.75.117.3", "208.75.117.2", "62.83.155.175"
+  ],
+
+  "ioc_rule": "An event is a ground-truth attack IOC iff its timestamp is within an attack window AND (its acting process name is in implant_process_names, OR it is an outbound connection to an IP in c2_ips_corroborating, OR it writes/unlinks a file whose basename starts with an implant_file_basename). Window + identity come from the report (authority); independent of the detector's generic signatures. [Same rule as CADETS -- do not change.]",
+
+  "path_label_rule": "A candidate path is ATTACK iff it contains >= 2 IOC events (frozen; sensitivity at >=3 reported); BENIGN iff 0 IOC events; EXCLUDED from the main run iff exactly 1. [Same rule as CADETS -- do not change.]",
+
+  "_scoping_note": "Strongest host-level episodes are 2018-04-10 (3.3) and 2018-04-12 (3.11): real implants, file drops, discovery, and C2, so they form scoreable chains. The 2018-04-13 attachment (4.8) FAILED on the target, and the 4.6 phishing link is browser credential-harvest with minimal host provenance, so both may contribute few or no attack paths -- that is a true property of the data, not a bug. Run cadets_e3_inspect.py on the THEIA files first to see which run (ta1-theia-e3-official-1r/3/5m/6r) covers Apr 10 and Apr 12.",
+
+  "source": "DARPA Transparent Computing E3 THEIA ground-truth report (Kudu Dynamics / TA5.1, May-2018), sections 3.3, 3.11, 4.6, 4.8."
+}

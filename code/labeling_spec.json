@@ -1,0 +1,21 @@
+{
+  "_README": "FROZEN GROUND-TRUTH LABELING SPEC for the CADETS E3 evaluation. This is the ONLY place attack-vs-benign truth enters the pipeline; the detector/tagger never sees it. Anchored on the DARPA TA5.1 ground-truth report. VERIFY completeness against the report before the official scored run; the code reads this file, so edits here need no code change.",
+  "timezone_note": "Ground-truth report times are US Eastern (UTC-4), confirmed by the April 6 crash (12:08 EDT) matching the last baseline-file record (16:08:59 UTC) and the April 11 crash likewise. Windows below are in UTC.",
+  "attack_windows_utc": [
+    ["2018-04-06T15:15:00Z", "2018-04-06T16:10:00Z"],
+    ["2018-04-11T19:00:00Z", "2018-04-11T19:20:00Z"],
+    ["2018-04-12T17:55:00Z", "2018-04-12T18:45:00Z"],
+    ["2018-04-13T13:00:00Z", "2018-04-13T13:25:00Z"]
+  ],
+  "implant_process_names": ["vUgefal", "vUGefai", "loaderDrakon", "drakon", "microapt", "micro-apt"],
+  "implant_file_basenames": ["libdrakon", "grain", "pEja72mA", "eWq10bVcx"],
+  "c2_ips_corroborating": [
+    "81.49.200.166", "25.159.96.207", "139.123.0.113", "200.36.109.214",
+    "78.205.235.65", "155.162.39.48", "76.56.184.25", "152.111.159.139",
+    "198.115.236.119", "98.15.44.232", "192.113.144.28", "53.158.101.118",
+    "154.145.113.18", "61.167.39.128"
+  ],
+  "ioc_rule": "An event is a ground-truth attack IOC iff its timestamp is within an attack window AND (its acting process name is in implant_process_names, OR it is an outbound connection to an IP in c2_ips_corroborating, OR it writes/unlinks a file whose basename starts with an implant_file_basename). Process-name and window come from the report (authority); they are independent of the detector's generic 'server dialed out' rule.",
+  "path_label_rule": "A candidate path is ATTACK iff it contains >= 2 IOC events (frozen; sensitivity at >=3 reported); BENIGN iff 0 IOC events; EXCLUDED from the main run iff exactly 1.",
+  "source": "DARPA Transparent Computing E3 CADETS ground-truth report (Kudu Dynamics / TA5.1) and the companion cadets_e3_attack_mapping.csv"
+}
