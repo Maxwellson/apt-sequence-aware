@@ -1,0 +1,11 @@
+{
+  "title": "Sequence-Aware Detection of APT Defense Evasion Using Behavioral Correlation (reproducibility artifact)",
+  "upload_type": "software",
+  "description": "Code and frozen design specification for the paper 'Sequence-Aware Detection of APT Defense Evasion Using Behavioral Correlation'. Decomposed path scoring (sequence alignment, temporal consistency, contextual coupling) over an externally grounded ATT&CK precedence graph, with two host-provenance pipelines, baselines, and bootstrap confidence intervals.",
+  "creators": [
+    {"name": "Maxwellson, Joshua Enoch", "affiliation": "Marymount University"},
+    {"name": "Olowononi, Felix", "affiliation": "Marymount University"}
+  ],
+  "keywords": ["advanced persistent threats", "defense evasion", "MITRE ATT&CK", "host provenance", "intrusion detection"],
+  "license": "MIT"
+}
