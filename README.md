@@ -3,7 +3,7 @@
 Reproducibility artifact for the paper *"Sequence-Aware Detection of APT Defense
 Evasion Using Behavioral Correlation"*
 
-- **Repository:** https://github.com/ORG/REPO  *(replace with the real URL)*
+- **Repository:** https://github.com/Maxwellson/apt-sequence-aware  
 - **Archived release (DOI):** https://doi.org/10.5281/zenodo.XXXXXXX  *(replace after the Zenodo deposit)*
 
 The method models a host intrusion as a temporal path through an externally
