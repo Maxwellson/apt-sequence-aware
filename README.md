@@ -1,8 +1,7 @@
 # Sequence-Aware Detection of APT Defense Evasion Using Behavioral Correlation
 
 Reproducibility artifact for the paper *"Sequence-Aware Detection of APT Defense
-Evasion Using Behavioral Correlation"* (F. Olowononi and J. E. Maxwellson,
-Marymount University).
+Evasion Using Behavioral Correlation"*
 
 - **Repository:** https://github.com/ORG/REPO  *(replace with the real URL)*
 - **Archived release (DOI):** https://doi.org/10.5281/zenodo.XXXXXXX  *(replace after the Zenodo deposit)*
